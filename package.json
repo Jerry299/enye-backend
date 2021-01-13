@@ -1,0 +1,23 @@
+{
+  "name": "enye-backend",
+  "version": "1.0.0",
+  "description": "backend section for enye application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jerry299/enye-backend.git"
+  },
+  "author": "Joseph Jeremiah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jerry299/enye-backend/issues"
+  },
+  "homepage": "https://github.com/Jerry299/enye-backend#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1"
+  }
+}
