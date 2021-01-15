@@ -13,6 +13,6 @@ const ratesRouter = require("./routes/Rates");
 app.use("/api", ratesRouter);
 
 const PORT = 5000;
-app.listen(PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
   console.log(`server is running on port ${PORT}`);
 });
