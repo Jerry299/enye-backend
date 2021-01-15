@@ -1,8 +1,5 @@
-const convertBaseToCurrency = (base, arrayOfOtherCurrency) => {
-  const result = arrayOfOtherCurrency.map((currency) => {
-    return base * Number(currency);
-  });
-  return result;
+const convertBaseToCurrency = (objectOfCurrencies, otherCurrency) => {
+  return objectOfCurrencies[otherCurrency];
 };
 
 module.exports = convertBaseToCurrency;

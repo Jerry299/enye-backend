@@ -1,11 +1,12 @@
 const axios = require("axios");
 const integratedEndpoint = "https://api.exchangeratesapi.io/latest";
+const convertBaseToCurrency = require("../utils");
 
 const getRates = (req, res) => {
   const { base, currency } = req.query;
-  const arrayOfCurrency = [currency].map((item) => {
-    return item;
-  });
+  // const arrayOfCurrency = [currency].map((item) => {
+  //   return item;
+  // });
   //do some simple validation
   if (!base || !currency) {
     return res.status(404).json({
@@ -16,28 +17,30 @@ const getRates = (req, res) => {
     });
   }
   let temp = {};
-  console.log(`${integratedEndpoint}?base=${base}`);
+
+  const baseUrl = `${integratedEndpoint}?base=${base}`;
   axios
-    .get(`${integratedEndpoint}?base=${base}`)
+    .get(baseUrl)
     .then((response) => {
+      //get the date of the response
       const date = response.data.date;
-      temp = response.data;
-      console.log(temp);
+      // convert the req.query.currency to an array and split it to get individual currency
+      const arrayOfCurrency = currency.split(",");
+      arrayOfCurrency.map((item) => {
+        // convertBaseToCurrency is a fumction to convert the base currency to the other currencies
+        return (temp[item] = convertBaseToCurrency(response.data.rates, item));
+      });
+
       res.json({
         results: {
           base: base,
           date: date,
-          rates: {
-            A: 12,
-            b: 23,
-            c: 45,
-          },
+          rates: temp,
           exampleCurrency: currency,
         },
       });
     })
     .catch((error) => {
-      console.log("error=====", error.response.statusText, "+++++Errorrr");
       res.status(404).json({
         success: false,
         message: `The Currency ${base} was ${error.response.statusText}`,
