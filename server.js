@@ -10,7 +10,7 @@ const ratesRouter = require("./routes/Rates");
 
 //use endpoints
 
-app.use("/api", ratesRouter);
+app.use("/", ratesRouter);
 
 const PORT = 5000;
 app.listen(process.env.PORT || PORT, () => {
